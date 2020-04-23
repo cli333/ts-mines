@@ -34,6 +34,10 @@ export const generateCells = (
         increment(row - 1, col, cells);
         increment(row, col + 1, cells);
         increment(row, col - 1, cells);
+        increment(row - 1, col - 1, cells);
+        increment(row - 1, col + 1, cells);
+        increment(row + 1, col - 1, cells);
+        increment(row + 1, col + 1, cells);
       }
     }
   }

@@ -3,8 +3,6 @@ import "./Cell.scss";
 import { ICellProps, ECellState, ECellValue } from "../../types";
 
 const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
-  console.log({ state, value });
-
   const renderCell = (): React.ReactNode => {
     switch (state) {
       case ECellState.visible:
@@ -15,6 +13,8 @@ const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
                 💣
               </span>
             );
+          case ECellValue.none:
+            return <span></span>;
           default:
             return <span>{value}</span>;
         }
@@ -30,7 +30,11 @@ const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
   };
 
   return (
-    <div className={`Cell ${state === ECellState.visible ? "visible" : ""}`}>
+    <div
+      className={`Cell ${
+        state === ECellState.visible ? "visible" : ""
+      } value-${value}`}
+    >
       {renderCell()}
     </div>
   );
