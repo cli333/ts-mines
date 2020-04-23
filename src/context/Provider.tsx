@@ -9,10 +9,31 @@ const Provider = ({ children }: IProviderProps) => {
   const [time, setTime] = React.useState<number>(0);
   const [live, setLive] = React.useState<boolean>(false);
   const [cells, setCells] = React.useState<TCell[][]>(generateCells(9, 9));
+  const [endGame, setEndGame] = React.useState<boolean>(false);
+
+  const reset = (): void => {
+    setFace(EFace.default);
+    setTime(0);
+    setLive(false);
+    setCells(generateCells(9, 9));
+    setEndGame(false);
+  };
 
   return (
     <Ctx.Provider
-      value={{ face, setFace, time, setTime, live, setLive, cells, setCells }}
+      value={{
+        face,
+        setFace,
+        time,
+        setTime,
+        live,
+        setLive,
+        cells,
+        setCells,
+        endGame,
+        setEndGame,
+        reset,
+      }}
     >
       {children}
     </Ctx.Provider>

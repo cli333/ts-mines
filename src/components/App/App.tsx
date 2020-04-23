@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.scss";
 import NumberDisplay from "../NumberDisplay/NumberDisplay";
 import Cell from "../Cell/Cell";
@@ -6,15 +6,6 @@ import { Ctx } from "../../context/Provider";
 
 const App: React.FC = () => {
   const ctx = React.useContext(Ctx);
-
-  useEffect(() => {
-    // if (ctx?.live) {
-    //   setInterval(
-    //     ctx.setTime((prevTime) => prevTime + 1),
-    //     1000
-    //   );
-    // }
-  });
 
   const renderCells = (): React.ReactNode => {
     return ctx?.cells.map((row, rowIndex) =>
@@ -34,7 +25,7 @@ const App: React.FC = () => {
       <div className="Header">
         <NumberDisplay value={0} />
         <div className="Face">
-          <span role="img" aria-label="face">
+          <span role="img" aria-label="face" onClick={() => ctx?.reset()}>
             {ctx?.face}
           </span>
         </div>

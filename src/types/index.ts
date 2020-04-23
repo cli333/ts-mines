@@ -45,8 +45,15 @@ export interface ICtx {
   setLive: React.Dispatch<React.SetStateAction<boolean>>;
   cells: TCell[][];
   setCells: React.Dispatch<React.SetStateAction<TCell[][]>>;
+  endGame: boolean;
+  setEndGame: React.Dispatch<React.SetStateAction<boolean>>;
+  reset: () => void;
 }
 
 export interface IProviderProps {
   children?: React.ReactNode;
+}
+
+export interface IUseCell {
+  handleClick: () => void;
 }

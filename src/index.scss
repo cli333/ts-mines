@@ -13,9 +13,14 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: black;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+button {
+  outline: none;
 }
