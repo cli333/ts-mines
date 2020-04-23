@@ -9,6 +9,7 @@ const Provider = ({ children }: IProviderProps) => {
   const [time, setTime] = React.useState<number>(0);
   const [live, setLive] = React.useState<boolean>(false);
   const [cells, setCells] = React.useState<TCell[][]>(generateCells(9, 9));
+  const [score, setScore] = React.useState<number>(0);
   const [endGame, setEndGame] = React.useState<boolean>(false);
 
   const reset = (): void => {
@@ -17,6 +18,7 @@ const Provider = ({ children }: IProviderProps) => {
     setLive(false);
     setCells(generateCells(9, 9));
     setEndGame(false);
+    setScore(0);
   };
 
   return (
@@ -30,6 +32,8 @@ const Provider = ({ children }: IProviderProps) => {
         setLive,
         cells,
         setCells,
+        score,
+        setScore,
         endGame,
         setEndGame,
         reset,

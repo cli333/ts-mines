@@ -65,6 +65,7 @@ export const flatten = (
     !cells[rowIndex] ||
     !cells[rowIndex][colIndex] ||
     cells[rowIndex][colIndex].state === ECellState.visible ||
+    cells[rowIndex][colIndex].state === ECellState.flagged ||
     cells[rowIndex][colIndex].value === ECellValue.bomb ||
     cells[rowIndex][colIndex].value !== value
   ) {

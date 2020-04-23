@@ -1,12 +1,17 @@
 import React from "react";
 import "./Cell.scss";
-import { ICellProps, ECellState, ECellValue, EFace } from "../../types";
+import { ICellProps, ECellState, ECellValue } from "../../types";
 import { Ctx } from "../../context/Provider";
 import useCell from "../../hooks/useCell";
 
 const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
   const ctx = React.useContext(Ctx);
-  const { handleClick } = useCell({ rowIndex, colIndex, state, value });
+  const { handleClick, handleMouseDown, handleMouseUp } = useCell({
+    rowIndex,
+    colIndex,
+    state,
+    value,
+  });
 
   const renderCell = (): React.ReactNode => {
     switch (state) {
@@ -40,13 +45,10 @@ const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
         state === ECellState.visible ? "visible" : ""
       } value-${value}`}
       disabled={ctx?.endGame}
-      onMouseDown={() =>
-        state === ECellState.notvisible && ctx?.setFace(EFace.worried)
-      }
-      onMouseUp={() =>
-        state === ECellState.notvisible && ctx?.setFace(EFace.default)
-      }
-      onClick={() => handleClick()}
+      onMouseDown={(e) => handleMouseDown(state, e)}
+      onMouseUp={() => handleMouseUp(state)}
+      onClick={(e) => handleClick(e)}
+      onContextMenu={(e) => e.preventDefault()}
     >
       {renderCell()}
     </button>

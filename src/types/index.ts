@@ -45,6 +45,8 @@ export interface ICtx {
   setLive: React.Dispatch<React.SetStateAction<boolean>>;
   cells: TCell[][];
   setCells: React.Dispatch<React.SetStateAction<TCell[][]>>;
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
   endGame: boolean;
   setEndGame: React.Dispatch<React.SetStateAction<boolean>>;
   reset: () => void;
@@ -55,5 +57,7 @@ export interface IProviderProps {
 }
 
 export interface IUseCell {
-  handleClick: () => void;
+  handleClick: (e: React.MouseEvent) => void;
+  handleMouseDown: (state: ECellState, e: React.MouseEvent) => void;
+  handleMouseUp: (state: ECellState) => void;
 }

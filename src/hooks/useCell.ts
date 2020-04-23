@@ -6,9 +6,12 @@ import { flatten } from "../utils/utils";
 export default ({ rowIndex, colIndex, state, value }: ICellProps): IUseCell => {
   const ctx = React.useContext(Ctx);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent): void => {
     // not live, set live
     if (!ctx?.live) ctx?.setLive(true);
+
+    // if flagged, return
+    if (ctx?.cells[rowIndex][colIndex].state === ECellState.flagged) return;
 
     // if visible, click does nothing
     if (state === ECellState.visible) return;
@@ -36,7 +39,27 @@ export default ({ rowIndex, colIndex, state, value }: ICellProps): IUseCell => {
     }
   };
 
+  const handleMouseDown = (state: ECellState, e: React.MouseEvent): void => {
+    if (e.nativeEvent.button === 2) {
+      ctx?.setCells((prevCells) => {
+        const newCells = JSON.parse(JSON.stringify(prevCells));
+        newCells[rowIndex][colIndex].state = ECellState.flagged;
+        if (newCells[rowIndex][colIndex].value === ECellValue.bomb)
+          ctx.setScore((prevScore) => prevScore + 1);
+        return newCells;
+      });
+      return;
+    }
+    if (state === ECellState.notvisible) ctx?.setFace(EFace.worried);
+  };
+
+  const handleMouseUp = (state: ECellState): void => {
+    if (state === ECellState.notvisible) ctx?.setFace(EFace.default);
+  };
+
   return {
     handleClick,
+    handleMouseDown,
+    handleMouseUp,
   };
 };

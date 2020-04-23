@@ -23,9 +23,14 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="Header">
-        <NumberDisplay value={0} />
+        <NumberDisplay value={ctx?.score!} />
         <div className="Face">
-          <span role="img" aria-label="face" onClick={() => ctx?.reset()}>
+          <span
+            role="img"
+            aria-label="face"
+            onClick={() => ctx?.reset()}
+            onContextMenu={(e) => e.preventDefault()}
+          >
             {ctx?.face}
           </span>
         </div>
