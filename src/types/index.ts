@@ -1,3 +1,5 @@
+import React from "react";
+
 export enum ECellValue {
   none,
   one,
@@ -25,4 +27,26 @@ export type TCell = {
 export interface ICellProps extends TCell {
   rowIndex: number;
   colIndex: number;
+}
+
+export enum EFace {
+  default = "😀",
+  worried = "😨",
+  lost = "😱",
+  won = "😁",
+}
+
+export interface ICtx {
+  face: EFace;
+  setFace: React.Dispatch<React.SetStateAction<EFace>>;
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
+  live: boolean;
+  setLive: React.Dispatch<React.SetStateAction<boolean>>;
+  cells: TCell[][];
+  setCells: React.Dispatch<React.SetStateAction<TCell[][]>>;
+}
+
+export interface IProviderProps {
+  children?: React.ReactNode;
 }

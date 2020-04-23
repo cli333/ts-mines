@@ -11,7 +11,7 @@ export const generateCells = (
     for (let col = 0; col < cols; col++) {
       cells[row].push({
         value: ECellValue.none,
-        state: ECellState.visible,
+        state: ECellState.notvisible,
       });
     }
   }
