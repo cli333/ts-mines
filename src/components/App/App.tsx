@@ -6,11 +6,18 @@ import { generateCells } from "../../utils/utils";
 import Cell from "../Cell/Cell";
 
 const App: React.FC = () => {
-  const [cells, setCells] = React.useState<TCell[][]>(generateCells(9, 9));
+  const [cells, setCells] = React.useState<TCell[][]>(generateCells(9, 9, 50));
 
   const renderCells = (): React.ReactNode => {
     return cells.map((row, rowIndex) =>
-      row.map((cell, colIndex) => <Cell key={`${rowIndex}-${colIndex}`} />)
+      row.map((cell, colIndex) => (
+        <Cell
+          key={`${rowIndex}-${colIndex}`}
+          {...cell}
+          rowIndex={rowIndex}
+          colIndex={colIndex}
+        />
+      ))
     );
   };
 

@@ -21,3 +21,8 @@ export type TCell = {
   value: ECellValue;
   state: ECellState;
 };
+
+export interface ICellProps extends TCell {
+  rowIndex: number;
+  colIndex: number;
+}
