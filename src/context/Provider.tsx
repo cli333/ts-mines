@@ -6,13 +6,15 @@ import { hasPlayerWon } from "../utils/utils";
 export const Ctx = React.createContext<ICtx | null>(null);
 
 const Provider = ({ children }: IProviderProps) => {
+  const [rows, setRows] = React.useState<number>(9);
+  const [cols, setCols] = React.useState<number>(9);
   const [face, setFace] = React.useState<EFace>(EFace.default);
   const [time, setTime] = React.useState<number>(0);
   const [live, setLive] = React.useState<boolean>(false);
   const [bombs, setBombs] = React.useState<number>(10);
   const [flags, setFlags] = React.useState<number>(bombs);
   const [cells, setCells] = React.useState<TCell[][]>(
-    generateCells(9, 9, bombs)
+    generateCells(rows, cols, bombs)
   );
   const [endGame, setEndGame] = React.useState<boolean>(false);
 
@@ -30,13 +32,21 @@ const Provider = ({ children }: IProviderProps) => {
     if (live && hasPlayerWon(cells, bombs)) won();
   }, [live, bombs, cells]);
 
+  useEffect(() => {
+    if (!live && !endGame) {
+      setCells(generateCells(rows, cols, bombs));
+      setBombs(bombs);
+      setFlags(bombs);
+    }
+  }, [live, endGame, rows, cols, bombs]);
+
   const reset = (): void => {
     setFace(EFace.default);
     setTime(0);
     setLive(false);
-    setBombs(10);
+    setBombs(bombs);
     setFlags(bombs);
-    setCells(generateCells(9, 9, bombs));
+    setCells(generateCells(rows, cols, bombs));
     setEndGame(false);
   };
 
@@ -49,6 +59,10 @@ const Provider = ({ children }: IProviderProps) => {
   return (
     <Ctx.Provider
       value={{
+        rows,
+        setRows,
+        cols,
+        setCols,
         face,
         setFace,
         time,

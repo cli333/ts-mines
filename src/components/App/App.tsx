@@ -22,35 +22,41 @@ const App: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div className="Settings">
+      {/* <div className="Settings">
         <label htmlFor="rows">Rows</label>
         <input
           name="rows"
           type="number"
-          placeholder="9"
           min="9"
-          max="30"
+          max="25"
           disabled={ctx?.live}
+          value={ctx?.rows!}
+          onChange={(e) => ctx?.setRows(+e.target.value)}
+          onKeyDown={(e) => e.preventDefault()}
         />
         <label htmlFor="rows">Columns</label>
         <input
           name="columns"
           type="number"
-          placeholder="9"
           min="9"
-          max="30"
+          max="45"
           disabled={ctx?.live}
+          value={ctx?.cols!}
+          onChange={(e) => ctx?.setCols(+e.target.value)}
+          onKeyDown={(e) => e.preventDefault()}
         />
         <label htmlFor="rows"># Bombs</label>
         <input
           name="bombs"
           type="number"
-          placeholder="10"
           min="10"
-          max="30"
+          max={ctx?.rows! * ctx?.cols! - 10}
           disabled={ctx?.live}
+          value={ctx?.bombs}
+          onChange={(e) => ctx?.setBombs(+e.target.value)}
+          onKeyDown={(e) => e.preventDefault()}
         />
-      </div>
+      </div> */}
 
       <div className="App">
         <div className="Header">
@@ -67,7 +73,15 @@ const App: React.FC = () => {
           </div>
           <NumberDisplay value={ctx?.time!} />
         </div>
-        <div className="Body">{renderCells()}</div>
+        <div
+          className="Body"
+          style={{
+            gridTemplateColumns: `repeat(${ctx?.cols}, 1fr)`,
+            gridTemplateRows: `repeat(${ctx?.rows}, 1fr)`,
+          }}
+        >
+          {renderCells()}
+        </div>
       </div>
     </React.Fragment>
   );

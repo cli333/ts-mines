@@ -93,6 +93,19 @@ export const hasPlayerWon = (cells: TCell[][], bombs: number): boolean => {
       }
     }
   }
-  console.log(numberUnopenedCells, 96);
   return numberUnopenedCells === bombs;
+};
+
+export const showAllBombs = (cells: TCell[][]): void => {
+  for (let row = 0; row < cells.length; row++) {
+    for (let col = 0; col < cells[0].length; col++) {
+      if (
+        (cells[row][col].state === ECellState.notvisible ||
+          cells[row][col].state === ECellState.flagged) &&
+        cells[row][col].value === ECellValue.bomb
+      ) {
+        cells[row][col].state = ECellState.visible;
+      }
+    }
+  }
 };

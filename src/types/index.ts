@@ -22,6 +22,7 @@ export enum ECellState {
 export type TCell = {
   value: ECellValue;
   state: ECellState;
+  triggered?: boolean;
 };
 
 export interface ICellProps extends TCell {
@@ -30,13 +31,17 @@ export interface ICellProps extends TCell {
 }
 
 export enum EFace {
-  default = "😀",
+  default = "😁",
   worried = "😨",
-  lost = "😱",
-  won = "😁",
+  lost = "💀",
+  won = "😎",
 }
 
 export interface ICtx {
+  rows: number;
+  setRows: React.Dispatch<React.SetStateAction<number>>;
+  cols: number;
+  setCols: React.Dispatch<React.SetStateAction<number>>;
   face: EFace;
   setFace: React.Dispatch<React.SetStateAction<EFace>>;
   time: number;

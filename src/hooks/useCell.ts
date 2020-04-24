@@ -1,7 +1,7 @@
 import React from "react";
 import { Ctx } from "../context/Provider";
 import { IUseCell, ICellProps, ECellValue, ECellState, EFace } from "../types";
-import { flatten } from "../utils/utils";
+import { flatten, showAllBombs } from "../utils/utils";
 
 export default ({ rowIndex, colIndex, state, value }: ICellProps): IUseCell => {
   const ctx = React.useContext(Ctx);
@@ -33,6 +33,12 @@ export default ({ rowIndex, colIndex, state, value }: ICellProps): IUseCell => {
 
     // if bomb, set face, set to lose
     if (value === ECellValue.bomb) {
+      ctx?.setCells((prevCells) => {
+        const newCells = JSON.parse(JSON.stringify(prevCells));
+        newCells[rowIndex][colIndex].triggered = true;
+        return newCells;
+      });
+      showAllBombs(ctx?.cells!);
       ctx?.setLive(false);
       ctx?.setFace(EFace.lost);
       ctx?.setEndGame(true);

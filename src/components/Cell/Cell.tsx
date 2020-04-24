@@ -4,8 +4,15 @@ import { ICellProps, ECellState, ECellValue } from "../../types";
 import { Ctx } from "../../context/Provider";
 import useCell from "../../hooks/useCell";
 
-const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
+const Cell: React.FC<ICellProps> = ({
+  value,
+  state,
+  rowIndex,
+  colIndex,
+  triggered,
+}) => {
   const ctx = React.useContext(Ctx);
+
   const { handleClick, handleMouseDown, handleMouseUp } = useCell({
     rowIndex,
     colIndex,
@@ -43,7 +50,7 @@ const Cell: React.FC<ICellProps> = ({ value, state, rowIndex, colIndex }) => {
     <button
       className={`Cell ${
         state === ECellState.visible ? "visible" : ""
-      } value-${value}`}
+      } value-${value} ${triggered ? "triggered" : ""}`}
       disabled={ctx?.endGame}
       onMouseDown={(e) => handleMouseDown(state, e)}
       onMouseUp={() => handleMouseUp(state)}
