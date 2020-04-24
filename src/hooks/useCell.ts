@@ -40,12 +40,16 @@ export default ({ rowIndex, colIndex, state, value }: ICellProps): IUseCell => {
   };
 
   const handleMouseDown = (state: ECellState, e: React.MouseEvent): void => {
-    if (e.nativeEvent.button === 2) {
+    if (e.nativeEvent.button === 2 && ctx?.live) {
       ctx?.setCells((prevCells) => {
         const newCells = JSON.parse(JSON.stringify(prevCells));
-        newCells[rowIndex][colIndex].state = ECellState.flagged;
-        if (newCells[rowIndex][colIndex].value === ECellValue.bomb)
-          ctx.setScore((prevScore) => prevScore + 1);
+        if (newCells[rowIndex][colIndex].state !== ECellState.flagged) {
+          newCells[rowIndex][colIndex].state = ECellState.flagged;
+          ctx.setFlags((prevFlags) => prevFlags - 1);
+        } else {
+          newCells[rowIndex][colIndex].state = ECellState.notvisible;
+          ctx.setFlags((prevFlags) => prevFlags + 1);
+        }
         return newCells;
       });
       return;

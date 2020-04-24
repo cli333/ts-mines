@@ -1,5 +1,14 @@
 @import "../../styles/index.scss";
 
+.Settings {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
   @include borders(white, #999);
   background: #c2c2c2;

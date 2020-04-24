@@ -3,7 +3,7 @@ import { ECellValue, ECellState, TCell } from "../types";
 export const generateCells = (
   cols: number,
   rows: number,
-  bombs = 10
+  bombs: number
 ): TCell[][] => {
   const cells: TCell[][] = [];
   for (let row = 0; row < rows; row++) {
@@ -78,4 +78,21 @@ export const flatten = (
     flatten(value, rowIndex, colIndex + 1, cells);
     flatten(value, rowIndex, colIndex - 1, cells);
   }
+};
+
+export const hasPlayerWon = (cells: TCell[][], bombs: number): boolean => {
+  // check if unopened cells = number of bombs
+  let numberUnopenedCells = 0;
+  for (let row = 0; row < cells.length; row++) {
+    for (let col = 0; col < cells[0].length; col++) {
+      if (
+        cells[row][col].state === ECellState.flagged ||
+        cells[row][col].state === ECellState.notvisible
+      ) {
+        numberUnopenedCells++;
+      }
+    }
+  }
+  console.log(numberUnopenedCells, 96);
+  return numberUnopenedCells === bombs;
 };

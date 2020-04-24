@@ -45,11 +45,14 @@ export interface ICtx {
   setLive: React.Dispatch<React.SetStateAction<boolean>>;
   cells: TCell[][];
   setCells: React.Dispatch<React.SetStateAction<TCell[][]>>;
-  score: number;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
   endGame: boolean;
   setEndGame: React.Dispatch<React.SetStateAction<boolean>>;
   reset: () => void;
+  bombs: number;
+  setBombs: React.Dispatch<React.SetStateAction<number>>;
+  flags: number;
+  setFlags: React.Dispatch<React.SetStateAction<number>>;
+  won: () => void;
 }
 
 export interface IProviderProps {

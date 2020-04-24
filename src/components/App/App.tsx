@@ -21,23 +21,55 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <div className="Header">
-        <NumberDisplay value={ctx?.score!} />
-        <div className="Face">
-          <span
-            role="img"
-            aria-label="face"
-            onClick={() => ctx?.reset()}
-            onContextMenu={(e) => e.preventDefault()}
-          >
-            {ctx?.face}
-          </span>
-        </div>
-        <NumberDisplay value={ctx?.time!} />
+    <React.Fragment>
+      <div className="Settings">
+        <label htmlFor="rows">Rows</label>
+        <input
+          name="rows"
+          type="number"
+          placeholder="9"
+          min="9"
+          max="30"
+          disabled={ctx?.live}
+        />
+        <label htmlFor="rows">Columns</label>
+        <input
+          name="columns"
+          type="number"
+          placeholder="9"
+          min="9"
+          max="30"
+          disabled={ctx?.live}
+        />
+        <label htmlFor="rows"># Bombs</label>
+        <input
+          name="bombs"
+          type="number"
+          placeholder="10"
+          min="10"
+          max="30"
+          disabled={ctx?.live}
+        />
       </div>
-      <div className="Body">{renderCells()}</div>
-    </div>
+
+      <div className="App">
+        <div className="Header">
+          <NumberDisplay value={ctx?.flags!} />
+          <div className="Face">
+            <span
+              role="img"
+              aria-label="face"
+              onClick={() => ctx?.reset()}
+              onContextMenu={(e) => e.preventDefault()}
+            >
+              {ctx?.face}
+            </span>
+          </div>
+          <NumberDisplay value={ctx?.time!} />
+        </div>
+        <div className="Body">{renderCells()}</div>
+      </div>
+    </React.Fragment>
   );
 };
 
