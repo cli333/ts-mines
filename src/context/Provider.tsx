@@ -11,7 +11,7 @@ const Provider = ({ children }: IProviderProps) => {
   const [face, setFace] = React.useState<EFace>(EFace.default);
   const [time, setTime] = React.useState<number>(0);
   const [live, setLive] = React.useState<boolean>(false);
-  const [bombs, setBombs] = React.useState<number>(10);
+  const [bombs, setBombs] = React.useState<number>(9);
   const [flags, setFlags] = React.useState<number>(bombs);
   const [cells, setCells] = React.useState<TCell[][]>(
     generateCells(rows, cols, bombs)
